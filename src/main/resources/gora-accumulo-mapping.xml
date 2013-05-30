@@ -1,0 +1,5 @@
+<gora-orm>
+    <class table="people" keyClass="java.lang.String" name="com.affy.generated.Person">
+        <field name="first" family="f" qualifier="q" />
+    </class>
+</gora-orm>

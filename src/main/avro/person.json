@@ -1,0 +1,8 @@
+{
+    "type": "record",
+    "name": "Person",
+    "namespace": "com.affy.generated",
+    "fields": [
+        {"name": "first", "type": "string"}
+    ]
+}
