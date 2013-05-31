@@ -6,28 +6,44 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>POJOs in Accumulo</name>
+    <name>gora-with-accumulo</name>
     <url>http://affy.com</url>
-    
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Dependency Versions -->
         <accumulo.version>1.4.3</accumulo.version>
         <gora.version>0.3</gora.version>
         <slf4j.version>1.7.5</slf4j.version>
+        <guava.version>14.0.1</guava.version>
+        <spring.version>3.2.3.RELEASE</spring.version>
         <!-- Maven Plugin Dependencies -->
         <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
         <maven-jar-plugin.version>2.4</maven-jar-plugin.version>
         <maven-dependency-plugin.version>2.4</maven-dependency-plugin.version>
         <maven-clean-plugin.version>2.4.1</maven-clean-plugin.version>
-    </properties>    
-    
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>springsource-repo</id>
+            <name>SpringSource Repository</name>
+            <url>http://repo.springsource.org/release</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <dependency>
             <groupId>org.apache.accumulo</groupId>
             <artifactId>accumulo-core</artifactId>
             <version>${accumulo.version}</version>
             <type>jar</type>
+            <exclusions>
+                <exclusion>
+                    <artifactId>servlet-api</artifactId>
+                    <groupId>javax.servlet</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.accumulo</groupId>
@@ -39,6 +55,16 @@
             <groupId>org.apache.gora</groupId>
             <artifactId>gora-core</artifactId>
             <version>${gora.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>ant</artifactId>
+                    <groupId>ant</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>servlet-api</artifactId>
+                    <groupId>org.mortbay.jetty</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.gora</groupId>
@@ -56,9 +82,31 @@
             <version>${slf4j.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>14.0.1</version>
+            <version>${guava.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>3.2.3.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
             <type>jar</type>
         </dependency>
         <!--
@@ -71,5 +119,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    
+
 </project>

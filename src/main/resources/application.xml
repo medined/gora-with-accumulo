@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="createSaveReadPerson" class="com.affy.Create_Save_Read_Person">
+        <property name="datastore" ref="datastore" />
+    </bean>
+
+    <bean id="datastore" class="org.apache.gora.store.DataStoreFactory" factory-method="getDataStore" destroy-method="close">
+        <constructor-arg index="0" value="java.lang.String"/>
+        <constructor-arg index="1" value="com.affy.generated.Person"/>
+        <constructor-arg index="2" ref="hadoopConfiguration"/>
+    </bean>
+
+    <bean id="hadoopConfiguration" class="org.apache.hadoop.conf.Configuration"/>
+
+</beans>

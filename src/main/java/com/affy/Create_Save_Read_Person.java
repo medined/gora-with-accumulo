@@ -12,23 +12,19 @@ public class Create_Save_Read_Person {
 
     public void process() throws GoraException {
         checkNotNull(datastore, "Datastore is null. Please set it.");
-        try {
-            Person person = new Person();
-            person.setFirst(new Utf8("David"));
-            System.out.println("Person: " + person);
-            System.out.println("First: " + person.getFirst());
+        Person person = new Person();
+        person.setFirst(new Utf8("David"));
+        System.out.println("Person: " + person);
+        System.out.println("First: " + person.getFirst());
 
-            if (!datastore.schemaExists()) {
-                datastore.createSchema();
-            }
-
-            datastore.put("001", person);
-
-            Person p = datastore.get("001");
-            System.out.println("p: " + p);
-        } finally {
-            datastore.close();
+        if (!datastore.schemaExists()) {
+            datastore.createSchema();
         }
+
+        datastore.put("001", person);
+
+        Person p = datastore.get("001");
+        System.out.println("p: " + p);
     }
 
     /**

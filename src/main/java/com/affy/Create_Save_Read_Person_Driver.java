@@ -1,18 +1,15 @@
 package com.affy;
 
-import com.affy.generated.Person;
-import org.apache.gora.store.DataStore;
-import org.apache.gora.store.DataStoreFactory;
 import org.apache.gora.util.GoraException;
-import org.apache.hadoop.conf.Configuration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Create_Save_Read_Person_Driver {
 
     public static void main(String[] args) throws GoraException {
-        DataStore<String, Person> datastore = DataStoreFactory.getDataStore(String.class, Person.class, new Configuration());
+        ApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"application.xml"});
 
-        Create_Save_Read_Person object = new Create_Save_Read_Person();
-        object.setDatastore(datastore);
+        Create_Save_Read_Person object = context.getBean("createSaveReadPerson", Create_Save_Read_Person.class);
         object.process();
     }
 }
